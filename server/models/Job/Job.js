@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const JobSchema = new Schema({
   id: {
     type: Number,
-    required: true
+    required: true,
+    unique: true
   },
   positionName: {
     type: String,
