@@ -7,6 +7,10 @@ const JobSchema = new Schema({
     required: true,
     unique: true
   },
+  title: {
+    type: String,
+    required: true
+  },
   positionName: {
     type: String,
     required: true
@@ -15,29 +19,13 @@ const JobSchema = new Schema({
     type: String,
     required: true
   },
-  city: {
-    type: String,
-    required: true
-  },
-  zipcode: {
+  location: {
     type: String,
     required: true
   },
   description: {
     type: String,
     required: true
-  },
-  responsibilities: {
-    type: String,
-    required: false
-  },
-  requirements: {
-      type: String,
-      required: false
-  },
-  qualifications: {
-    type: String,
-    required: false
   },
   url: {
       type: String,
