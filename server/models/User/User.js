@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true
-  },
   name: {
     type: String,
     required: true
@@ -21,18 +16,21 @@ const UserSchema = new Schema({
     required: true,
     minlength: 6
   },
-  phone: {
+  address: {
     type: String,
     required: false,
-    unique: true
   },
-  zipcode: {
+  city: {
     type: String,
     required: true
   },
-  occupation: {
-      type: String,
-      required: true
+  state: {
+    type: String,
+    required: true
+  },
+  zipcode: {
+    type: Number,
+    required: true
   },
   date: {
     type: Date,
