@@ -11,6 +11,7 @@
     "canvasjs": "^1.8.3",
     "chart.js": "^2.9.3",
     "mdbreact": "^4.25.6",
+    "mongodb": "^3.6.3",
     "react": "^16.14.0",
     "react-bootstrap": "^1.0.0",
     "react-chartjs-2": "^2.9.0",
