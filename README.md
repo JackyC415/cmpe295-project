@@ -14,6 +14,10 @@
 2) npm install
 3) npm start
 
+# Neural collaborative filtering script:
+
+1) Install tensorflow, lightfm and pandas (python version 3.8 recommended)
+
 # Run concurrently instruction:
 1) Ensure modules are installed in both server and client
 2) cd cmpe295-project/server/
