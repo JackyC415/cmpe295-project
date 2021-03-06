@@ -23,11 +23,6 @@ from scipy import sparse
 from tensorboard import notebook
 from tensorflow.keras.optimizers import Adam
 
-# print(f"Tensorflow version: {tf.__version__}")
-# print(f"LightFM version: {lightfm.__version__}")
-# print(f"Pandas version: {pd.__version__}")
-# print(f"Numpy version: {np.__version__}")
-
 TOP_K = 5
 N_EPOCHS = 10
 
