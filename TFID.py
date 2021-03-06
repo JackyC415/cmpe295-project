@@ -11,6 +11,7 @@ cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
 
 results = {}
 
+# compute similarities based on the linear kernel
 for idx, row in ds.iterrows():
     similar_indices = cosine_similarities[idx].argsort()[:-100:-1]
     similar_items = [(cosine_similarities[idx][i], ds['id'][i]) for i in similar_indices]
@@ -22,7 +23,7 @@ print('done!')
 def item(id):
     return ds.loc[ds['id'] == id]['description'].tolist()[0].split(' - ')[0]
 
-# Just reads the results out of the dictionary.
+# display results for N matching items
 def recommend(item_id, num):
     print("Recommending " + str(num) + " products similar to " + item(item_id) + "...")
     print("-------")
