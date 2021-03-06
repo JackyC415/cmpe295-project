@@ -9,6 +9,8 @@ const { Double } = require("mongodb");
 
 const dir = '../APIFY-Crawler-Server/files/';
 
+const Json2csvParser = require("json2csv").Parser;
+
 function init() {
   return fs.readdirSync(dir)
            .filter(name => path.extname(name) === '.json')
@@ -24,7 +26,8 @@ fileObjs.forEach(file => {
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
-MongoClient.connect(url, function(err, db) {
+MongoClient.connect(url, function(err, db) 
+{
   if (err) throw err;
   var dbo = db.db("cmpe295");
   
@@ -35,10 +38,38 @@ MongoClient.connect(url, function(err, db) {
         console.log("Collection created!");
     
   });
+  dbo.collection("jobs").deleteMany({});//for now delete first before update new jobs
   //Insert scraped data to jobs collection 
   dbo.collection("jobs").insertMany(fileObjs, function(err, res) {
     if (err) throw err;
     console.log("Number of documents inserted: " + res.insertedCount);
   });
-  db.close();
+  var resumeData="id,description\n";
+
+  //Write resume to CSV
+  dbo.collection("parsers").find({}).toArray((err, data) => 
+  {
+    if (err) throw err;
+
+    console.log(data);
+    const json2csvParser = new Json2csvParser({ header: false });
+    resumeData += json2csvParser.parse(data);
+  });
+
+  //Write resume+jobs to CSV
+  dbo.collection("jobs").find({}).toArray((err, data) => 
+  {
+    if (err) throw err;
+
+    console.log(data);
+    const json2csvParser = new Json2csvParser({ header: false });
+    const jobsData = json2csvParser.parse(data);
+    const csvData=resumeData+jobsData;
+    fs.writeFile("../jobs-data.csv", csvData, function(error) {
+      if (error) throw error;
+      console.log("Write to jobs-data.csv successfully!");
+    })
+    db.close();
+  });
+  
 });
