@@ -27,6 +27,12 @@
 # Jumpstart instruction:
 git clone https://github.com/JackyC415/cmpe295-project.git && cd cmpe295-project && cd client && npm i && cd ../server && npm i && npm run dev
 
+#to update scraped data to database
+1) npm install json2csv
+2) cd cmpe295-project/server/
+3) node dbparser.js
 
 for crawldata file 
 npm install indeed-scraper
+
+
