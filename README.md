@@ -2,7 +2,8 @@
 
 1) Download and install Nodejs w/ npm: https://nodejs.org/en/
 2) Download and install git
-2) git clone https://github.com/JackyC415/cmpe295-project.git
+3) Download and install Robo3T (MongoDB GUI) and setup mongo https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+4) git clone https://github.com/JackyC415/cmpe295-project.git
 
 # Frontend (client) manual run instruction:
 1) cd cmpe295-project/client/
@@ -26,6 +27,12 @@
 # Jumpstart instruction:
 git clone https://github.com/JackyC415/cmpe295-project.git && cd cmpe295-project && cd client && npm i && cd ../server && npm i && npm run dev
 
+#to update scraped data to database
+1) npm install json2csv
+2) cd cmpe295-project/server/
+3) node dbparser.js
 
 for crawldata file 
 npm install indeed-scraper
+
+
