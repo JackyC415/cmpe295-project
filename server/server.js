@@ -37,7 +37,8 @@ connectMongoDB();
 
 //API routes
 app.use(require('./routes/User/user')); 
-app.use(require('./routes/Upload/uploadResume')); 
+app.use(require('./routes/Upload/uploadResume'));
+app.use(require('./routes/Recommender/recommendJobs'));
 
 app.use(express.static(path.join(__dirname, "../client/build")));
 app.listen(PORT, () => console.log('Server listening on port:', PORT));
