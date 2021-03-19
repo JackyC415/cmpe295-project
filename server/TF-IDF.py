@@ -6,8 +6,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 jobsFile = pd.read_csv("jobsData.csv")
 resumesFile = pd.read_csv("resumeData.csv")
-
-tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words='english')
+my_stopword_list = ['and','to','the','of','he','she','we','us','her','his','our','there','here','when','what','by','is','are','him','why','how','has','have']
+tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=my_stopword_list)
 jobs_matrix = tfidf_vectorizer.fit_transform(jobsFile['description'])
 resumes_matrix = tfidf_vectorizer.transform(resumesFile['description'])
 
