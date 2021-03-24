@@ -2,9 +2,9 @@ const fs = require('fs');
 const { forEach } = require('jszip');
 const { stringify } = require('querystring');
 const Json2csvParser = require("json2csv").Parser;
-const jobsDataFileLoc="/jobs-data.csv";
-const jobsSkillDataFileLoc="/jobs-skills-data.csv";
-const skillCollectionFileLoc="/tech_skills.csv";
+const jobsDataFileLoc="jobs-data.csv";
+const jobsSkillDataFileLoc="jobs-skills-data.csv";
+const skillCollectionFileLoc="tech_skills.csv";
 
 
 var jobData = fs.readFileSync(jobsDataFileLoc)
@@ -30,7 +30,10 @@ for (var jobIndex=1;jobIndex<jobData.length;jobIndex++)
             skillStr+=skill+" ";
         }
     });
-    eachJob+=", "+skillStr;
+    skillStr=skillStr.trim();
+    if (skillStr!=""){
+        eachJob+=", "+skillStr;
+    }
     jobData[jobIndex]=eachJob;
 };
 
