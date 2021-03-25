@@ -3,13 +3,17 @@ import json
 import operator
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+import nltk
+from nltk.corpus import stopwords 
+nltk.download('stopwords')
 
 jobsFile = pd.read_csv("jobs-skills-data.csv")
-resumesFile = pd.read_csv("resumeData.csv")
-my_stopword_list = ['and','to','the','of','he','she','we','us','her','his','our','there','here','when','what','by','is','are','him','why','how','has','have']
-tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=my_stopword_list)
+resumesFile = pd.read_csv("resume-skill.csv")
+stopset = set(stopwords.words('english'))
+
+tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=stopset)
 jobs_matrix = tfidf_vectorizer.fit_transform(jobsFile['Skills'].astype(str))
-resumes_matrix = tfidf_vectorizer.transform(resumesFile['description'])
+resumes_matrix = tfidf_vectorizer.transform(resumesFile['Skills'])
 
 matchingJobsList = []
 matchingRate = 0
