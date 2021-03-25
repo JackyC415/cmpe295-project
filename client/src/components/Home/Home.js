@@ -72,7 +72,7 @@ class Home extends Component {
     if (this.state.output.length > 0) {
       table = (
         <div>
-          <Table style={{ marginLeft: "-400px" }} striped bordered hover>
+          <Table style={{ width: "200px", tableLayout:"auto", marginLeft:"-300px" }} striped bordered hover>
             <tr>
               <th>ID</th>
               <th>Title</th>
@@ -88,7 +88,7 @@ class Home extends Component {
                   <td>{item.title}</td>
                   <td>{item.source}</td>
                   <td>
-                    <a href={item.url} target="_blank">{item.url}</a>
+                    <div style={{maxWidth: "300px", overflow:"scroll", whiteSpace:"normal"}}><a href={item.url} target="_blank">{item.url}</a></div>
                   </td>
                   <td>{item.score}</td>
                   <button type="button" onClick={() => {
