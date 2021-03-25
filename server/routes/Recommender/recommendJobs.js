@@ -10,8 +10,8 @@ router.get('/recommend', async (req, res) => {
         return res.send(data.toString());
     });
 
-    childPython.stderr.on('data', (data) => {
-        console.log('cannot run script.');
+    childPython.stderr.on('data', (err) => {
+        console.log('script errors: ' + err);
     });
 
     childPython.on('close', (data) => {
