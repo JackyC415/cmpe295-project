@@ -12,7 +12,7 @@ resumesFile = pd.read_csv("resume-skill.csv")
 stopset = set(stopwords.words('english'))
 
 tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=stopset)
-jobs_matrix = tfidf_vectorizer.fit_transform(jobsFile['Skills'].astype(str))
+jobs_matrix = tfidf_vectorizer.fit_transform(jobsFile['Skills'])
 resumes_matrix = tfidf_vectorizer.transform(resumesFile['Skills'])
 
 matchingJobsList = []
