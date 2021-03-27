@@ -17,7 +17,7 @@ resume_skills_matrix = tfidf_vectorizer.transform(resumesFile['Skills'])
 
 tfidf_vectorizer2 = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=stopset)
 job_description_matrix = tfidf_vectorizer2.fit_transform(jobsFile['description'])
-resume_description_matrix = tfidf_vectorizer2.transform(resumesFile['Skills'])
+resume_description_matrix = tfidf_vectorizer2.transform(resumesFile['description'])
 
 matchingJobsList = []
 matchingRate = 0.0
