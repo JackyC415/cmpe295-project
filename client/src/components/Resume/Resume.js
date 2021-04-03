@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 import cookie from 'react-cookies';
 import { Redirect } from 'react-router';
@@ -17,9 +17,9 @@ class Resume extends Component {
 			description	: "",
 			form		: ""
 		};
-		let redirectHome = null;
-		if(cookie.load('cookie') !== 'authenticated') {
-			redirectHome = <Redirect to="/" />
+//		let redirectHome = null;
+		if(!cookie.load('cookie')) {
+//			redirectHome = <Redirect to="/" />
 			window.location = "/";
 		}
 		
@@ -81,9 +81,9 @@ class Resume extends Component {
 			<div class="wp-form form-resume">
 				<Form method="post" onSubmit={this.handleSubmit}>
 					<input type="hidden" value="{id}" name="id" />
-					<div class="grid-view">
-						<div class="cell-label">Skills</div>
-						<div class="cell-data">
+					<div className="grid-view">
+						<div className="cell-label">Skills</div>
+						<div className="cell-data">
 							<textarea className="form-control"
                             	name="Skills"
                             	onChange={this.handleChange}
@@ -91,9 +91,9 @@ class Resume extends Component {
 								value={this.state.Skills} />
 						</div>
 					</div>
-					<div class="grid-view">
-						<div class="cell-label">Description</div>
-						<div class="cell-data">
+					<div className="grid-view">
+						<div className="cell-label">Description</div>
+						<div className="cell-data">
 							<textarea className="form-control"
                             	name="description"
                             	onChange={this.handleChange}
@@ -101,8 +101,8 @@ class Resume extends Component {
 								value={this.state.description} />
 						</div>
 					</div>
-					<div class="wp-btn">
-						<button class="btn btn-success">Update</button>
+					<div className="wp-btn">
+						<Button className="btn btn-success">Update</Button>
 					</div>
 				</Form>
 			</div>

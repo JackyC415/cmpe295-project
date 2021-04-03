@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
-import { Form, Button, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+//import { Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 import cookie from 'react-cookies';
-import { Redirect } from 'react-router';
+//import { Redirect } from 'react-router';
 
 import '../../styling/CenterFormStyling.css';
 import '../../styling/styles.css';
@@ -11,20 +11,22 @@ import '../../styling/styles.css';
 class Jobs extends Component {
     constructor(props) {
         super(props);
+		const params = this.props.match.params;
 		this.state = {
-			params		: this.props.match.params,
+			id			: params.id,
+			index		: params.index,
 			title		: "",
 			comany		: "",
 			salary		: "",
 			location	: "",
 			position	: "",
 			Skills		: "",
-			description	: "",
-			hidden		: " hidden"
+			description	: ""
 		};
-		let redirectHome = null;
-		if(cookie.load('cookie') !== 'authenticated') {
-			redirectHome = <Redirect to="/" />
+		
+//		let redirectHome = null;
+		if(cookie.load('cookie') !== 'authenticated'){
+//			redirectHome	= <Redirect to="/" />
 			window.location = "/";
 		}
 		this.handleGetData();
@@ -37,8 +39,8 @@ class Jobs extends Component {
 	
 	handleGetData = () => {
        const post = {
-            id		: this.state.params.id,
-            index	: this.state.params.index
+            id		: this.state.id,
+            index	: this.state.index
         };
 		axios.post('http://localhost:3001/get_detail', post)
             .then(res => {
@@ -69,7 +71,6 @@ class Jobs extends Component {
             <div className="wrapper">
 				<div className="main">
 					<h1 className="page-title">Job Detail</h1>
-					
 					<div className="detail-page">
 						<div class="wp-btn"><a class="btn btn-primary" href="/jobs">View More Jobs</a></div>
 						<h1 class="page-title">{this.state.title}</h1>

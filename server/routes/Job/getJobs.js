@@ -11,9 +11,9 @@ router.post('/get_jobs', async (req, res) => {
 	var keyword	= req.body.keyword;
 	var page	= req.body.page;
 	var nextPage= ++page;
+	var prevPage= --page;
 	var ipp		= 40;
-	//var ipp = {{number}};
-	page	= 1;
+//	page	= 1;
 	if(undefined == page)
 		page	= 1;
 	if(undefined == keyword)
@@ -36,7 +36,8 @@ router.post('/get_jobs', async (req, res) => {
 			var allP= Math.ceil(allI / ipp);
 			if( page > allP)
 				page	= allP;
-			nextPage 	= page++;
+			nextPage 	= page + 1;
+			prevPage	= page - 1;
 			if(nextPage > allP)
 				nextPage= 0;
 			
@@ -62,6 +63,7 @@ router.post('/get_jobs', async (req, res) => {
 			res.setHeader("Content-Type", "application/json");
 			res.status(200).send(JSON.stringify({
 				next_page	: nextPage,
+				prev_page	: prevPage,
 				keyword		: keyword,
 				items		: output
 			}));
@@ -69,6 +71,7 @@ router.post('/get_jobs', async (req, res) => {
 			res.setHeader("Content-Type", "application/json");
 			res.status(200).send(JSON.stringify({
 				next_page	: 0,
+				prev_page	: 0,
 				keyword		: keyword,
 				items		: []
 			}));

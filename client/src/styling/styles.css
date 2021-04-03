@@ -127,3 +127,11 @@
 .form-resume .form-control[name=description] {
 	height:300px;
 }
+
+.wp-pagination {
+	padding:20px 0;
+	text-align:center;
+}
+.wp-pagination [name=page] {
+	
+}

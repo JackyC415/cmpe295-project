@@ -20,7 +20,7 @@ class Main extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/home" component={Home} />
 				<Route path="/jobs" component={Jobs} />
-				<Route path="/job_detail/:id/:index" component={JobsDetail} />
+				<Route path="/job_detail/:id/:index" component={JobsDetail} /> 
 				<Route path="/resume" component={Resume} />
 				<Route path="/recommend" component={Recommend} />
             </div>
