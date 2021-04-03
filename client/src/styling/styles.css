@@ -1,0 +1,129 @@
+.grid-view {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-flow: row wrap;
+}
+.wrapper {
+	width:1180px;
+	margin:0 auto;
+}
+.main {
+	padding:30px 0;
+	width:100%;
+}
+.top-nav {
+	margin-bottom:30px;
+}
+.items {}
+.item {
+	box-sizing:border-box;
+	padding:5px;
+	width:50%;
+	height:100%;
+}
+.inner-item {
+	border:1px solid #ccc;
+	border-radius:5px;
+	padding:5px;
+	
+}
+.inner-item > div {
+	margin:5px 0;
+}
+.item .item-id {
+	display:none;
+	text-align:center;
+	width:80px;
+}
+.item .item-title {
+	font-size:22px;
+	font-weight:bold;
+}
+.item .item-title a {
+	text-decoration:none;
+}
+.item .item-company-name,
+.item .item-salary,
+.item .item-source,
+.item .item-position,
+.item .item-location {
+	width:50%;
+}
+.item .item-salary {
+	font-size:18px;
+}
+.item .item-skills {
+	display: -webkit-box;
+	-webkit-line-clamp:1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.item .item-desc {
+	display: -webkit-box;
+	-webkit-line-clamp:3;
+	-webkit-box-orient:vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.wp-search {
+	max-width:500px;
+}
+
+.pagination {
+	text-align: center;
+	display: block;
+	padding: 20px;
+}
+.detail-page {
+	border:1px solid #ccc;
+	border-radius:5px;
+	padding:30px;
+	margin:0 auto;
+	max-width:700px;
+}
+.detail-page > div {margin:5px 0;}
+.detail-page .page-title {}
+.detail-page .comany-name, 
+.detail-page .salary,
+.detail-page .location, 
+.detail-page .position  {
+	padding:5px 0;
+	width:50%;
+}
+.detail-page .grid-view {
+	margin:0 -5px;
+}
+.detail-page .skill {}
+.detail-page .desc {}
+.detail-page .wp-desc {
+	border-top:1px solid #ccc;
+	margin-top:10px;
+	padding-top:10px;
+	text-align:justify;
+}
+.form-resume {
+	margin: 0 auto;
+	max-width: 600px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 5px;
+}
+.form-resume .grid-view {}
+.form-resume .grid-view .cell-label,
+.form-resume .grid-view .cell-data {
+	padding:5px;
+}
+.form-resume .grid-view .cell-label {
+	width:120px;
+}
+.form-resume .grid-view .cell-data {
+	width:calc(100% - 120px);
+}
+.form-resume .wp-btn {
+	text-align:center;
+}
+.form-resume .form-control[name=description] {
+	height:300px;
+}

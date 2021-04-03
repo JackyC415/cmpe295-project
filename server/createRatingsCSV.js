@@ -10,11 +10,11 @@ const csvWriter = createCsvWriter({
 });
 
 let records = [];
-for(let i = 0; i < 5000; i++) {
+for(let i = 0; i < 500000; i++) {
     records.push({
-        userID: Math.floor(Math.random() * 100),
-        itemID: Math.floor(Math.random() * 10000),
-        rating: Math.floor(Math.random() * 5) + 1,
+        userID: Math.floor(Math.random() * 1000),
+        itemID: Math.floor(Math.random() * 1000),
+        rating: Math.floor(Math.random() * 1) + 5,
         timestamp: Date.now()
     });
 }

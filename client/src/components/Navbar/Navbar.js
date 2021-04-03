@@ -40,7 +40,7 @@ class NavbarPage extends Component {
     }
     render() {
         let main, redirectHome = null;
-        if (cookie.load('cookie') === 'authenticated') {
+        if(cookie.load('cookie') === 'authenticated') {
             main = (
                 <Navbar color="light" light expand="md">
                     <Nav className="ml-auto" navbar>
@@ -52,6 +52,15 @@ class NavbarPage extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
+                                <NavLink tag={Link} to="/resume">Resume</NavLink>
+                            </NavItem>
+							<NavItem>
+                                <NavLink tag={Link} to="/home">Recommender</NavLink>
+                            </NavItem>
+							<NavItem>
+                                <NavLink tag={Link} to="/jobs">Jobs</NavLink>
+                            </NavItem>
+							<NavItem>
                                 <NavLink tag={Link} to="/" onClick={this.handleLogout}>Logout</NavLink>
                             </NavItem>
                         </Nav>

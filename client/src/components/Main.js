@@ -5,6 +5,10 @@ import Navbar from './Navbar/Navbar';
 import Login from './User/Login';
 import Register from './User/Register';
 import Home from './Home/Home';
+import Jobs from './Jobs/Jobs';
+import JobsDetail from './Jobs/Detail';
+import Resume from './Resume/Resume';
+import Recommend from './Recommend/Recommend';
 
 class Main extends Component {
     render() {
@@ -15,6 +19,10 @@ class Main extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/home" component={Home} />
+				<Route path="/jobs" component={Jobs} />
+				<Route path="/job_detail/:id/:index" component={JobsDetail} />
+				<Route path="/resume" component={Resume} />
+				<Route path="/recommend" component={Recommend} />
             </div>
         )
     }
