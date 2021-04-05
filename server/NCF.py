@@ -12,32 +12,18 @@ from tensorflow.keras.regularizers import l2
 from typing import List
 import datetime
 import os
-import lightfm
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 import scipy.sparse
 import scipy.sparse as sp
 import random
-from lightfm import LightFM
-from lightfm.datasets import fetch_movielens
-from lightfm.evaluation import precision_at_k
 from scipy import sparse
 from tensorboard import notebook
 from tensorflow.keras.optimizers import Adam
 
 TOP_K = 5
 N_EPOCHS = 10
- 
-
-data1 = fetch_movielens(min_rating=3.0)
-#trainData = pd.DataFrame.sparse.from_spmatrix(data1["train"])
-#compression_opts = dict(method='zip', archive_name='train.csv') 
-#trainData.to_csv('train.zip', index=False, compression=compression_opts)
-#testData = pd.DataFrame.sparse.from_spmatrix(data1["test"])
-#compression_opts = dict(method='zip', archive_name='test.csv') 
-#testData.to_csv('test.zip', index=False, compression=compression_opts)
-
 
 df = pd.read_csv('ratings.csv')
 uids = set()
@@ -77,9 +63,6 @@ trainDataR = pd.DataFrame.sparse.from_spmatrix(data["train"])
 compression_opts2 = dict(method='zip', archive_name='trainR.csv') 
 trainDataR.to_csv('trainR.zip', index=False, compression=compression_opts2)
 
-#print(data["train"])
-#print(type(data["train"]))
-#print(data["test"])
 print("Interaction matrix:")
 print(data["train"].toarray()[:10, :10])
 
@@ -92,7 +75,6 @@ print(data["train"][:10, :10])
 
 print("\nRatings:")
 unique_ratings = np.unique(data["train"])
-#print(unique_ratings)
 
 print(unique_ratings)
 def wide_to_long(wide: np.array, possible_ratings: List[int]) -> np.array:
