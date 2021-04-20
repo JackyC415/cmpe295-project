@@ -1,3 +1,7 @@
+body {
+	/*background-color: red !important;*/
+	background-image: url("../styling/Images/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png");
+}
 .grid-view {
 	display: -ms-flexbox;
 	display: -webkit-flex;

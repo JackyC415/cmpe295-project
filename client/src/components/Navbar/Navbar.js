@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component }  from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import cookie from 'react-cookies';
 import axios from 'axios';
+import {useState} from 'react';
 
 import {
     Collapse,
@@ -11,8 +12,12 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Spinner
+    Spinner,
+    Button,
+    Fade
 } from 'reactstrap';
+
+   
 
 class NavbarPage extends Component {
     constructor(props) {
@@ -42,10 +47,10 @@ class NavbarPage extends Component {
         let main, redirectHome = null;
         if(cookie.load('cookie') === 'authenticated') {
             main = (
-                <Navbar color="light" light expand="md">
+                <Navbar color="dark" light expand="md">
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink tag={Link} to="/">Automated Jobs Recommendation Portal</NavLink>
+                            <NavLink tag={Link} to="/"><img src="../../styling/Images/MainLogo/logo_size_invert.jpg"/></NavLink>
                         </NavItem>
                     </Nav>
                     <NavbarToggler onClick={this.toggle} />
@@ -69,29 +74,13 @@ class NavbarPage extends Component {
             )
         } else {
             main = (
-                <Navbar color="light" light expand="md">
+                <Navbar color="faded" light expand="md">
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink tag={Link} to="/">Automated Jobs Recommendation Portal</NavLink>
+                            <NavLink tag={Link} to="/"><Link><img src="../../styling/Images/MainLogo/logo_size_invert.jpg" height={"50"} width={"70"}/></Link></NavLink>
                         </NavItem>
                     </Nav>
                     <div>
-                        <Spinner type="grow" color="primary" />
-                        <Spinner type="grow" color="secondary" />
-                        <Spinner type="grow" color="success" />
-                        <Spinner type="grow" color="danger" />
-                        <Spinner type="grow" color="warning" />
-                        <Spinner type="grow" color="info" />
-                        <Spinner type="grow" color="light" />
-                        <Spinner type="grow" color="dark" />
-                        <Spinner color="primary" />
-                        <Spinner color="secondary" />
-                        <Spinner color="success" />
-                        <Spinner color="danger" />
-                        <Spinner color="warning" />
-                        <Spinner color="info" />
-                        <Spinner color="light" />
-                        <Spinner color="dark" />
                     </div>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -105,6 +94,7 @@ class NavbarPage extends Component {
                         </Nav>
                     </Collapse>
                 </Navbar>
+
             )
         }
         cookie.load('cookie') === 'authenticated'
@@ -112,10 +102,27 @@ class NavbarPage extends Component {
         return (
             <div>
                 {main}
-                {redirectHome}
+                {redirectHome}      
             </div>
         )
     }
 }
+
+
+ const Example = (props) => {
+    const [fadeIn, setFadeIn] = useState(true); 
+    const toggle = () => setFadeIn(!fadeIn);
+
+return (
+        <div>
+            <Button color="primary" onClick={toggle}>Toggle Fade</Button>
+            <Fade in={fadeIn} tag="h5" className="mt-3">
+                This content will fade in and out as the button is pressed
+            </Fade>
+        </div>
+    );
+}
+
+
 
 export default NavbarPage;
