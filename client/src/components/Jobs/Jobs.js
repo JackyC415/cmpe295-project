@@ -21,6 +21,7 @@ class Jobs extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleGetData = this.handleGetData.bind(this);
+    this.handleUrlRedirect = this.handleUrlRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -29,22 +30,21 @@ class Jobs extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.state.page = 1;
+    this.setState({ page: 1 });
     this.handleGetData();
   };
 
   handleChange = (e) => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
-    this.state[e.target.name] = e.target.value;
     if (e.target.name === "page") this.handleGetData();
   };
 
   handlePageNav = (e) => {
     e.preventDefault();
-
-    if (e.target.id === "btnPrev") this.state.page = this.state.prevPage;
-    else this.state.page = this.state.nextPage;
+    e.target.id === "btnPrev"
+      ? (this.state.page = this.state.prevPage)
+      : (this.state.page = this.state.nextPage);
     this.handleGetData();
   };
 
@@ -58,17 +58,21 @@ class Jobs extends Component {
         .post("http://localhost:3001/get_jobs", post)
         .then((res) => {
           if (res.status === 200) {
-			  this.setState({ 
-				jobs: res.data.items,
-				prevPage	: res.data.prev_page,
-				nextPage	: res.data.next_page 
-			});
-		  }
+            this.setState({
+              jobs: res.data.items,
+              prevPage: res.data.prev_page,
+              nextPage: res.data.next_page,
+            });
+          }
         })
         .catch((errors) => {
           console.log(errors);
         });
     }
+  };
+
+  handleUrlRedirect = (url) => {
+    window.open(url, "_blank");
   };
 
   render() {
@@ -140,7 +144,14 @@ class Jobs extends Component {
                           >
                             {jobs.description}
                           </Card.Text>
-                          <Button variant="primary">Apply</Button>
+                          <Button
+                            variant="primary"
+                            onClick={() => {
+                              this.handleUrlRedirect(jobs.url);
+                            }}
+                          >
+                            Apply
+                          </Button>
                           <Button
                             style={{ marginLeft: "20px" }}
                             variant="primary"
