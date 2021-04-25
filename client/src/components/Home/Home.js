@@ -155,7 +155,7 @@ class Home extends Component {
             <Row>
               {this.state.paginatedData.map((jobs) => {
                 return (
-                  <Col xs>
+                  <Col key={jobs.id} xs>
                     <Card
                       border="primary"
                       style={{
