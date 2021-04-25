@@ -55,7 +55,7 @@ class Jobs extends Component {
         keyword: this.state.keyword,
       };
       axios
-        .post("http://localhost:3001/get_jobs", post)
+        .post("/get_jobs", post)
         .then((res) => {
           if (res.status === 200) {
             this.setState({
