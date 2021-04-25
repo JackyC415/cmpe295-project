@@ -22,7 +22,7 @@ class Home extends Component {
       recommendInProgress: false,
       status: "",
       offset: 0,
-      perPage: 1,
+      perPage: 3,
       currentPage: 0,
       paginatedData: [],
       loadingStatus: false,
