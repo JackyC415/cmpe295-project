@@ -22,7 +22,7 @@ class Home extends Component {
       recommendInProgress: false,
       status: "",
       offset: 0,
-      perPage: 3,
+      perPage: 9,
       currentPage: 0,
       paginatedData: [],
       loadingStatus: false,
@@ -35,7 +35,7 @@ class Home extends Component {
   }
 
   handleUrlRedirect = (url) => {
-    window.open(url, "_blank");
+    window.open("https://www.indeed.com/", "_blank");
   };
 
   loadMoreData() {
@@ -81,6 +81,10 @@ class Home extends Component {
         axios
           .get("/recommend")
           .then((res) => {
+
+            console.log(res.data)
+            console.log(typeof(res.data))
+
             this.setState({
               recommendInProgress: false,
             });
@@ -101,7 +105,6 @@ class Home extends Component {
       })
       .catch((errors) => {
         console.log(errors);
-        alert("Oops, something went wrong!");
       });
   };
 
@@ -153,7 +156,7 @@ class Home extends Component {
         <div className="main">
           <Container>
             <Row>
-              {this.state.paginatedData.map((jobs) => {
+              {this.state.paginatedData?.map((jobs) => {
                 return (
                   <Col key={jobs.id} xs>
                     <Card

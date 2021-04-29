@@ -7,12 +7,13 @@ import nltk
 from nltk.corpus import stopwords 
 nltk.download('stopwords')
 
-jobsFile = pd.read_csv("jobs-data.csv")
+#jobsFile = pd.read_csv("jobs-data.csv")
+jobsFile = pd.read_csv("jobs-skills-data1.csv")
 resumesFile = pd.read_csv("resumes-data.csv")
 stopset = set(stopwords.words('english'))
 
 tfidf_vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=stopset)
-job_skills_matrix = tfidf_vectorizer.fit_transform(jobsFile['Skills'])
+job_skills_matrix = tfidf_vectorizer.fit_transform(jobsFile['Skills'].astype('U'))
 resume_skills_matrix = tfidf_vectorizer.transform(resumesFile['Skills'])
 
 # tfidf_vectorizer2 = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words=stopset)
@@ -32,11 +33,11 @@ for idx in range(len(jobsFile)):
 			"id": idx, 
 			"title": jobsFile['title'][idx], 
 			"score": skills_similarity_score[0][0], #+ description_similarity_score[0][0], 
-			"url": jobsFile['url'][idx],
+			#"url": jobsFile['url'][idx],
 			"source": jobsFile['source'][idx],
 			"company": jobsFile['company_name'][idx],
 			"description": str(jobsFile['description'][idx])
 			})
 
-topTenMatchingJobs = sorted(matchingJobsList, key=operator.itemgetter('score'), reverse=True)[:4]
+topTenMatchingJobs = sorted(matchingJobsList, key=operator.itemgetter('score'), reverse=True)[:6]
 print(json.dumps(topTenMatchingJobs))
