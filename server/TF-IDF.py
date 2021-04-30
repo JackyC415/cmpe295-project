@@ -39,5 +39,5 @@ for idx in range(len(jobsFile)):
 			"description": str(jobsFile['description'][idx])
 			})
 
-topTenMatchingJobs = sorted(matchingJobsList, key=operator.itemgetter('score'), reverse=True)[:6]
+topTenMatchingJobs = sorted(matchingJobsList, key=operator.itemgetter('score'), reverse=True)[:7]
 print(json.dumps(topTenMatchingJobs))
