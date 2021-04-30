@@ -22,14 +22,14 @@ class Home extends Component {
       recommendInProgress: false,
       status: "",
       offset: 0,
-      perPage: 9,
+      perPage: 6,
       currentPage: 0,
       paginatedData: [],
       loadingStatus: false,
     };
 
     this.handleUrlRedirect = this.handleUrlRedirect.bind(this);
-    this.recommendJobs = this.recommendJobs.bind(this);
+    this.handleRecommendations = this.handleRecommendations.bind(this);
     this.handleUploadFile = this.handleUploadFile.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
@@ -72,51 +72,35 @@ class Home extends Component {
     axios
       .post("/upload", formData)
       .then((res) => {
-        if (res.status === 200)
+        if (res.status === 200) {
           this.setState({
             uploadInProgress: false,
             status: "Resume Uploaded Successfully!",
+            recommendInProgress: true,
           });
-        this.setState({ recommendInProgress: true });
-        axios
-          .get("/recommend")
-          .then((res) => {
-
-            console.log(res.data)
-            console.log(typeof(res.data))
-
-            this.setState({
-              recommendInProgress: false,
-            });
-            let slice = res.data.slice(
-              this.state.offset,
-              this.state.offset + this.state.perPage
-            );
-            this.setState({
-              jobs: [...res.data],
-              pageCount: Math.ceil(res.data.length / this.state.perPage),
-              paginatedData: slice,
-              loadingStatus: true,
-            });
-          })
-          .catch((errors) => {
-            console.log(errors);
-          });
+          this.handleRecommendations();
+        }
       })
       .catch((errors) => {
         console.log(errors);
       });
   };
 
-  recommendJobs = () => {
-    this.setState({ recommendInProgress: true });
+  handleRecommendations = () => {
     axios
       .get("/recommend")
       .then((res) => {
+        let slice = res.data.slice(
+          this.state.offset,
+          this.state.offset + this.state.perPage
+        );
         this.setState({
+          jobs: [...res.data],
+          pageCount: Math.ceil(res.data.length / this.state.perPage),
+          paginatedData: slice,
+          loadingStatus: true,
           recommendInProgress: false,
         });
-        this.setState({ jobs: [...res.data] });
       })
       .catch((errors) => {
         console.log(errors);
