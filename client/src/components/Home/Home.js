@@ -142,7 +142,7 @@ class Home extends Component {
             <Row>
               {this.state.paginatedData?.map((jobs) => {
                 return (
-                  <Col key={jobs.id} xs>
+                  <Col key={jobs.jid} xs>
                     <Card
                       border="primary"
                       style={{
@@ -172,9 +172,9 @@ class Home extends Component {
                         >
                           {jobs.company?.toUpperCase()}
                         </Card.Title>
-                        <Card.Text>
+                        {/* <Card.Text>
                           <b>Matching Score:</b> {jobs.score?.toFixed(3)}
-                        </Card.Text>
+                        </Card.Text> */}
                         <b>Description:</b>
                         <Card.Text
                           style={{

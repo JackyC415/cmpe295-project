@@ -4,10 +4,11 @@ import operator
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
+import pdmongo as pdm
 from nltk.corpus import stopwords 
 nltk.download('stopwords')
 
-jobsFile = pd.read_csv("jobs-skills-data1.csv")
+jobsFile = pdm.read_mongo("jobs", [], "mongodb://localhost:27017/cmpe295")
 resumesFile = pd.read_csv("resumes-data.csv")
 stopset = set(stopwords.words('english'))
 
@@ -21,16 +22,7 @@ for idx in range(len(jobsFile)):
 	skills_similarity_score = cosine_similarity(job_skills_matrix[idx],resume_skills_matrix[0])
 	
 	if skills_similarity_score > matchingRate:
-		matchingJobsList.append(
-			{
-			"id": idx, 
-			"title": jobsFile['title'][idx], 
-			"score": skills_similarity_score[0][0], #+ description_similarity_score[0][0], 
-			#"url": jobsFile['url'][idx],
-			"source": jobsFile['source'][idx],
-			"company": jobsFile['company_name'][idx],
-			"description": str(jobsFile['description'][idx])
-			})
+		matchingJobsList.append({ "jid": idx, "score": skills_similarity_score[0][0] })
 
-topTenMatchingJobs = sorted(matchingJobsList, key=operator.itemgetter('score'), reverse=True)[:10]
+topTenMatchingJobs = sorted(matchingJobsList, key=operator.itemgetter('score'), reverse=True)[:50]
 print(json.dumps(topTenMatchingJobs))

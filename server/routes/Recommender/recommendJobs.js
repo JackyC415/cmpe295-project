@@ -1,23 +1,32 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const spawn =  require('child_process').spawn;
+const spawn = require("child_process").spawn;
+const Jobs = require("../../models/Job/Job");
 
-router.get('/recommend', async (req, res) => {
-
-    const childPython = spawn('python3', ['./TF-IDF.py']);
-    childPython.stdout.on('data', (data) => {
-        console.log(JSON.parse(data.toString()));
-        return res.status(200).send(JSON.parse(data.toString()));
+router.get("/recommend", async (req, res) => {
+  const childPython = spawn("python3", ["./TF-IDF.py"]);
+  childPython.stdout.on("data", async (data) => {
+    let jobs = JSON.parse(data.toString());
+    let jobIDs = [];
+    let jobPromise = new Promise((resolve, reject) => {
+      for (let i = 0; i < jobs.length; i++) {
+        jobIDs.push(jobs[i].jid);
+      }
+      resolve();
     });
-
-    childPython.stderr.on('data', (err) => {
-        console.log('script errors: ' + err);
+    jobPromise.then(async () => {
+      let jobData = await Jobs.find({ jid: { $in: jobIDs } });
+      return res.status(200).send(jobData);
     });
+  });
 
-    childPython.on('close', (data) => {
-        console.log('ending script...');
-    });
+  childPython.stderr.on("data", (err) => {
+    console.log("script errors: " + err);
+  });
 
+  childPython.on("close", (data) => {
+    console.log("ending script...");
+  });
 });
 
 module.exports = router;
