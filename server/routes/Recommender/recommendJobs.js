@@ -7,15 +7,20 @@ router.get("/recommend", async (req, res) => {
   const childPython = spawn("python3", ["./TF-IDF.py"]);
   childPython.stdout.on("data", async (data) => {
     let jobs = JSON.parse(data.toString());
-    let jobIDs = [];
-    let jobPromise = new Promise((resolve, reject) => {
+    let jobData = [];
+
+    let jobPromise = new Promise(async (resolve, reject) => {
       for (let i = 0; i < jobs.length; i++) {
-        jobIDs.push(jobs[i].jid);
+        await Jobs.findOne({ jid: jobs[i].jid }, (err, job) => {
+          let jobObj = job.toObject();
+          jobObj.score = jobs[i].score;
+          jobData.push(jobObj);
+        });
       }
       resolve();
     });
-    jobPromise.then(async () => {
-      let jobData = await Jobs.find({ jid: { $in: jobIDs } });
+
+    jobPromise.then(() => {
       return res.status(200).send(jobData);
     });
   });
