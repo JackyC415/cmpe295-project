@@ -170,11 +170,11 @@ class Home extends Component {
                             overflow: "hidden",
                           }}
                         >
-                          {jobs.company?.toUpperCase()}
+                          {jobs.company_name?.toUpperCase()}
                         </Card.Title>
-                        {/* <Card.Text>
+                        <Card.Text>
                           <b>Matching Score:</b> {jobs.score?.toFixed(3)}
-                        </Card.Text> */}
+                        </Card.Text>
                         <b>Description:</b>
                         <Card.Text
                           style={{
