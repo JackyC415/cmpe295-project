@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-
 import "../../styling/styles.css";
 
 class Home extends Component {
@@ -26,16 +25,38 @@ class Home extends Component {
       currentPage: 0,
       paginatedData: [],
       loadingStatus: false,
+      userId: "",
     };
 
     this.handleUrlRedirect = this.handleUrlRedirect.bind(this);
+    this.handleBookmark = this.handleBookmark.bind(this);
     this.handleRecommendations = this.handleRecommendations.bind(this);
     this.handleUploadFile = this.handleUploadFile.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  handleUrlRedirect = (url) => {
-    window.open("https://www.indeed.com/", "_blank");
+  componentDidMount = () => {
+    const jobs = JSON.parse(localStorage.getItem("jobs"));
+
+    if (jobs) {
+      let slice = jobs.slice(
+        this.state.offset,
+        this.state.offset + this.state.perPage
+      );
+      this.setState({
+        jobs: [...jobs],
+        pageCount: Math.ceil(jobs.length / this.state.perPage),
+        paginatedData: slice,
+        loadingStatus: true,
+        recommendInProgress: false,
+        userId: jobs[0].userId,
+      });
+    }
+  };
+
+  handleUrlRedirect = (url, jobId) => {
+    //window.open("https://www.indeed.com/", "_blank");
+    alert("User: " + this.state.userId + " applied: " + jobId);
   };
 
   loadMoreData() {
@@ -75,8 +96,8 @@ class Home extends Component {
         if (res.status === 200) {
           this.setState({
             uploadInProgress: false,
-            status: "Resume Uploaded Successfully!",
             recommendInProgress: true,
+            status: "Resume Uploaded Successfully!",
           });
           this.handleRecommendations();
         }
@@ -90,21 +111,29 @@ class Home extends Component {
     axios
       .get("/recommend")
       .then((res) => {
-        let slice = res.data.slice(
-          this.state.offset,
-          this.state.offset + this.state.perPage
-        );
-        this.setState({
-          jobs: [...res.data],
-          pageCount: Math.ceil(res.data.length / this.state.perPage),
-          paginatedData: slice,
-          loadingStatus: true,
-          recommendInProgress: false,
-        });
+        if (res.status === 200) {
+          let slice = res.data.slice(
+            this.state.offset,
+            this.state.offset + this.state.perPage
+          );
+          this.setState({
+            jobs: [...res.data],
+            pageCount: Math.ceil(res.data.length / this.state.perPage),
+            paginatedData: slice,
+            loadingStatus: true,
+            recommendInProgress: false,
+            userId: res.data[0].userId,
+          });
+          localStorage.setItem("jobs", JSON.stringify(res.data));
+        }
       })
       .catch((errors) => {
         console.log(errors);
       });
+  };
+
+  handleBookmark = (jobId) => {
+    alert("User: " + this.state.userId + " bookmarked: " + jobId);
   };
 
   render() {
@@ -188,7 +217,7 @@ class Home extends Component {
                         <Button
                           variant="primary"
                           onClick={() => {
-                            this.handleUrlRedirect(jobs.url);
+                            this.handleUrlRedirect(jobs.url, jobs.jid);
                           }}
                         >
                           Apply
@@ -196,6 +225,9 @@ class Home extends Component {
                         <Button
                           style={{ marginLeft: "20px" }}
                           variant="primary"
+                          onClick={() => {
+                            this.handleBookmark(jobs.jid);
+                          }}
                         >
                           Bookmark
                         </Button>
@@ -206,6 +238,7 @@ class Home extends Component {
               })}
             </Row>
           </Container>
+
           {this.state.loadingStatus ? (
             <div className="paginateBttns">
               <ReactPaginate

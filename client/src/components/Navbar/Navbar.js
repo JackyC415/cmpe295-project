@@ -31,6 +31,7 @@ class NavbarPage extends Component {
     axios.post("/logout").then((res) => {
       if (res) {
         cookie.remove("cookie", { path: "/" });
+        localStorage.removeItem("jobs");  
         this.props.history.push("/login");
       }
     });

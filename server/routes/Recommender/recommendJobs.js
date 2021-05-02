@@ -12,15 +12,19 @@ router.get("/recommend", async (req, res) => {
     let jobPromise = new Promise(async (resolve, reject) => {
       for (let i = 0; i < jobs.length; i++) {
         await Jobs.findOne({ jid: jobs[i].jid }, (err, job) => {
-          let jobObj = job.toObject();
-          jobObj.score = jobs[i].score;
-          jobData.push(jobObj);
+          if (!err) {
+            let jobObj = job.toObject();
+            jobObj.score = jobs[i].score;
+            jobObj.userId = req.session.ID;
+            jobData.push(jobObj);
+          }
         });
       }
       resolve();
     });
 
     jobPromise.then(() => {
+      console.log(jobData);
       return res.status(200).send(jobData);
     });
   });
