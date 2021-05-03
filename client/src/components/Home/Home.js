@@ -28,7 +28,7 @@ class Home extends Component {
       userId: "",
     };
 
-    this.handleUrlRedirect = this.handleUrlRedirect.bind(this);
+    this.handleApply = this.handleApply.bind(this);
     this.handleBookmark = this.handleBookmark.bind(this);
     this.handleRecommendations = this.handleRecommendations.bind(this);
     this.handleUploadFile = this.handleUploadFile.bind(this);
@@ -52,11 +52,6 @@ class Home extends Component {
         userId: jobs[0].userId,
       });
     }
-  };
-
-  handleUrlRedirect = (url, jobId) => {
-    //window.open("https://www.indeed.com/", "_blank");
-    alert("User: " + this.state.userId + " applied: " + jobId);
   };
 
   loadMoreData() {
@@ -132,8 +127,32 @@ class Home extends Component {
       });
   };
 
+  handleApply = (url, jobId) => {
+    window.open("https://www.indeed.com/", "_blank");
+    this.handleRating(jobId, 5, "apply");
+  };
+
   handleBookmark = (jobId) => {
-    alert("User: " + this.state.userId + " bookmarked: " + jobId);
+    this.handleRating(jobId, 3, "bookmark");
+  };
+
+  handleRating = (jobId, score, type) => {
+    let newRating = {
+      jobId: jobId,
+      userId: this.state.userId,
+      rating: score,
+    };
+    axios
+      .post("/rate", newRating)
+      .then((res) => {
+        if (res.status === 200)
+          alert("User: " + this.state.userId + " Rated: " + jobId);
+      })
+      .catch((errors) => {
+        if (type === "bookmark")
+          alert("Job ID: " + jobId + " is already bookmarked.");
+        console.log(errors);
+      });
   };
 
   render() {
@@ -143,7 +162,7 @@ class Home extends Component {
           <Form>
             <Form.File
               id="custom-file"
-              label="Please upload resume"
+              label="Please upload PDF resume"
               onChange={this.handleUploadFile}
               custom
             />
@@ -217,7 +236,7 @@ class Home extends Component {
                         <Button
                           variant="primary"
                           onClick={() => {
-                            this.handleUrlRedirect(jobs.url, jobs.jid);
+                            this.handleApply(jobs.url, jobs.jid);
                           }}
                         >
                           Apply
