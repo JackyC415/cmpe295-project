@@ -78,38 +78,38 @@ class Register extends Component {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit} className="center-form">
-                    <h2>Create account</h2>
+                    <h2 className="text-info">Create account</h2>
                     <Form.Group controlId="formUsername">
-                        <Form.Label>Your name</Form.Label>
+                        <Form.Label className="text-muted">Name</Form.Label>
                         <Form.Control
                             type="text"
                             name="name"
                             minLength="3"
                             maxLength="30"
                             onChange={this.handleChange}
-                            placeholder="Your name"
+                            placeholder="John Doe"
                             required />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label className="text-muted">E-mail</Form.Label>
                         <Form.Control
                             type="email"
                             name="email"
-                            placeholder="Enter email"
+                            placeholder="john.doe@email.com"
                             onChange={this.handleChange}
                             required />
                     </Form.Group>
                     <Form.Group controlId="formGridAddress">
-                        <Form.Label>Address</Form.Label>
+                        <Form.Label className="text-muted">Address</Form.Label>
                         <Form.Control
                             type="text"
                             name="address"
                             onChange={this.handleChange}
-                            placeholder="Enter address" />
+                            placeholder="Enter your personal address" />
                     </Form.Group>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridCity">
-                            <Form.Label>City</Form.Label>
+                            <Form.Label className="text-muted">City</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="city"
@@ -117,7 +117,7 @@ class Register extends Component {
                                 onChange={this.handleChange} />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridState">
-                            <Form.Label>State</Form.Label>
+                            <Form.Label className="text-muted">State</Form.Label>
                             <Form.Control
                                 as="select"
                                 type="text"
@@ -131,7 +131,7 @@ class Register extends Component {
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formZipcode">
-                            <Form.Label>Zipcode</Form.Label>
+                            <Form.Label className="text-muted">Zipcode</Form.Label>
                             <Form.Control
                                 type="number"
                                 name="zipcode"
@@ -139,11 +139,11 @@ class Register extends Component {
                                 placeholder="5 digits"
                                 value={this.state.zipcode}
                                 onChange={this.handleChange}
-                                required />
+                             />
                         </Form.Group>
                     </Form.Row>
                     <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label className="text-muted">Password</Form.Label>
                         <Form.Control
                             type="password"
                             name="password"
@@ -153,10 +153,10 @@ class Register extends Component {
                             onChange={this.handleChange}
                             required />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="info" type="submit">
                         Register
           </Button> &nbsp;
-          <div>Already have an account? <Link to="/login">Login</Link></div><br />
+          <div>Already have an account? <Link to="/login" className="text-info">Login</Link></div><br />
                     <div> {this.state.output} </div>
                 </Form>
             </div>

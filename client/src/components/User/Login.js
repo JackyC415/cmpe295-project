@@ -59,12 +59,14 @@ class Login extends Component {
     return (
       <div>{redirectHome}
         <Form onSubmit={this.handleSubmit} className="center-form">
-          <h2>Login</h2>
+          <h2 className="text-info">Login</h2>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label className="text-muted">E-mail</Form.Label>
             <Form.Control
               type="email"
-              name="email" value={this.state.email}
+              name="email" 
+              placeholder="john.doe@email.com"
+              value={this.state.email}
               onChange={this.handleChange}
               required />
             <Form.Text className="text-muted">
@@ -72,7 +74,7 @@ class Login extends Component {
                 </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="text-muted">Password</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -83,8 +85,8 @@ class Login extends Component {
               onChange={this.handleChange}
               required />
           </Form.Group>
-          <Button variant="primary" type="submit">Login</Button>
-          <div>New? <Link to="/register">Create account</Link></div>
+          <Button variant="info" type="submit">Login</Button> 
+          <div>New ? <Link to="/register" className="text-info">Create account</Link></div>
           <div>{this.state.output}</div>
         </Form>
       </div>

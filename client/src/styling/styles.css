@@ -1,3 +1,7 @@
+body {
+	/*background-color: red !important;*/
+	background-image: url("../styling/Images/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png");
+}
 .grid-view {
 	display: -ms-flexbox;
 	display: -webkit-flex;
@@ -135,3 +139,35 @@
 .wp-pagination [name=page] {
 	
 }
+
+.paginationBttns {
+	width: 80%;
+	height: 40px;
+	list-style: none;
+	display: flex;
+	justify-content: center;
+  }
+  
+  .paginationBttns a {
+	padding: 10px;
+	margin: 8px;
+	border-radius: 5px;
+	border: 1px solid #2b2eff;
+	color: #2b2eff;
+	cursor: pointer;
+  }
+  
+  .paginationBttns a:hover {
+	color: white;
+	background-color: #2b2eff;
+  }
+  
+  .paginationActive a {
+	color: white;
+	background-color: #2b2eff;
+  }
+  
+  .paginationDisabled a {
+	color: grey;
+	background-color: grey;
+  }
