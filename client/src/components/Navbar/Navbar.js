@@ -12,7 +12,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Spinner,
   Button,
   Fade,
 } from "reactstrap";
@@ -50,7 +49,6 @@ class NavbarPage extends Component {
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/">
-                <img src="../../styling/Images/MainLogo/logo_size_invert.jpg" />
               </NavLink>
             </NavItem>
           </Nav>
@@ -62,16 +60,16 @@ class NavbarPage extends Component {
                   Home
                 </NavLink>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink tag={Link} to="/jobs">
                   Recommendation
                 </NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem> */}
+              {/* <NavItem>
                 <NavLink tag={Link} to="/resume">
                   Resume
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink tag={Link} to="/" onClick={this.handleLogout}>
                   Logout
@@ -88,11 +86,6 @@ class NavbarPage extends Component {
             <NavItem>
               <NavLink tag={Link} to="/">
                 <Link>
-                  <img
-                    src="../../styling/Images/MainLogo/logo_size_invert.jpg"
-                    height={"50"}
-                    width={"70"}
-                  />
                 </Link>
               </NavLink>
             </NavItem>
