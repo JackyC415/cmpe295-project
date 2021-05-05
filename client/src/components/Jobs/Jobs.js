@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 import cookie from 'react-cookies';
-//import { Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 
 import '../../styling/CenterFormStyling.css';
 import '../../styling/styles.css';
@@ -21,11 +21,6 @@ class Jobs extends Component {
 			jobs	: ''
         };
 		
-//		let redirectHome = null;
-		if(cookie.load('cookie') !== 'authenticated'){
-//			redirectHome	= <Redirect to="/" />
-			window.location = "/";
-		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange	= this.handleChange.bind(this);
 //		this.handleGetData	= this.handleGetData.bind(this);
@@ -62,7 +57,7 @@ class Jobs extends Component {
 				page	: this.state.page,
 				keyword	: this.state.keyword
 			};
-			axios.post('http://localhost:3001/get_jobs', post)
+			axios.post('/get_jobs', post)
 				.then(res => {
 					
 					if(res.status === 200){
@@ -72,7 +67,7 @@ class Jobs extends Component {
 							for(var i = 0; i < items.length; i++){
 								output += '<div class="item"><div class="inner-item">';
 								output += '<div class="item-id">' + items[i].id + '</div>';
-								output += '<div class="item-title"><a href="/job_detail/' + items[i].id + '/' + items[i].index + '">' + items[i].title + '</a></div>';
+								output += '<div class="item-title"><a href="/jobs_detail?' + items[i].index + '">' + items[i].title + '</a></div>';
 								output += '<div class="grid-view">';
 								output += '<div class="item-company-name">Company: <strong>' + items[i].company + '</strong></div>';
 								output += '<div class="item-salary">Salary: <strong>' + items[i].salary + '</strong></div>';
@@ -109,8 +104,13 @@ class Jobs extends Component {
     }
 	
     render() {
+		let redirectHome = null;
+		if(cookie.load('cookie') !== 'authenticated'){
+			redirectHome	= <Redirect to="/" />
+		}
         return (
             <div className="wrapper">
+				{redirectHome}
 				<div className="main">
 					<h1 className="page-title">Job Page</h1>
 					<Form onSubmit={this.handleSubmit}>

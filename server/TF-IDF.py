@@ -24,14 +24,14 @@ matchingRate = 0.0
 for idx in range(len(jobsFile)):
 	skills_similarity_score = cosine_similarity(job_skills_matrix[idx],resume_skills_matrix[0])
 	description_similarity_score = cosine_similarity(job_description_matrix[idx],resume_description_matrix[0])
-	total_similarity_score = skills_similarity_score + description_similarity_score
+	total_similarity_score = skills_similarity_score * 0.95 + description_similarity_score * 0.05
 
 	if total_similarity_score > matchingRate:
 		matchingJobsList.append(
 			{
 			"id": idx, 
 			"title": jobsFile['title'][idx], 
-			"score": skills_similarity_score[0][0] + description_similarity_score[0][0], 
+			"score": skills_similarity_score[0][0]* 0.95 + description_similarity_score[0][0]* 0.05, 
 			"url": jobsFile['url'][idx],
 			"source": jobsFile['source'][idx]
 			})

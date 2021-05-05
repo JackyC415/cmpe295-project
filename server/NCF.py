@@ -27,7 +27,7 @@ from tensorboard import notebook
 from tensorflow.keras.optimizers import Adam
 
 TOP_K = 5
-N_EPOCHS = 10
+N_EPOCHS = 20
  
 
 data1 = fetch_movielens(min_rating=3.0)
@@ -72,6 +72,7 @@ dataConvert= mat.tocoo()
 data = {'train': dataConvert,
         'test': dataConvert,
         }
+#data['test']=data1['test']
 print(data)
 trainDataR = pd.DataFrame.sparse.from_spmatrix(data["train"])
 compression_opts2 = dict(method='zip', archive_name='trainR.csv') 

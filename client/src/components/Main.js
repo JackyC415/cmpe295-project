@@ -6,7 +6,7 @@ import Login from './User/Login';
 import Register from './User/Register';
 import Home from './Home/Home';
 import Jobs from './Jobs/Jobs';
-import JobsDetail from './Jobs/Detail';
+import Detail from './Jobs/Detail';
 import Resume from './Resume/Resume';
 import Recommend from './Recommend/Recommend';
 
@@ -20,7 +20,7 @@ class Main extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/home" component={Home} />
 				<Route path="/jobs" component={Jobs} />
-				<Route path="/job_detail/:id/:index" component={JobsDetail} /> 
+				<Route path="/jobs_detail" component={Detail} /> 
 				<Route path="/resume" component={Resume} />
 				<Route path="/recommend" component={Recommend} />
             </div>
