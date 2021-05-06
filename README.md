@@ -21,13 +21,12 @@
 2) cd cmpe295-project/server/
 3) npm run dev
 
-# Jumpstart instruction:
+# Jumpstart (one-liner) instruction:
 git clone https://github.com/JackyC415/cmpe295-project.git && cd cmpe295-project && cd client && npm i && cd ../server && npm i && npm run dev
 
-# MISC: to persist scraped data to MongoDB:
+# MISC: to persist data to MongoDB:
 1) npm install json2csv
 2) cd cmpe295-project/server/
 3) node dbparser.js
-
-# install indeed scraper:
-npm install indeed-scraper
+4) mongoimport --type csv -d cmpe295 -c jobs --headerline --drop jobs-skills-data1.csv
+5) mongoimport --type csv -d cmpe295 -c ratings --headerline --drop ratings.csv
